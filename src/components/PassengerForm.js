@@ -43,6 +43,16 @@ const schema = yup.object({
 const PassengerForm = () => {
   const { handleSubmit, reset, control } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: {
+      firstName: "",
+      middleName: "",
+      suffix: "",
+      lastName: "",
+      dateOfBirth: "",
+      email: "",
+      phoneNumber: "",
+      travellerNumber: "",
+    },
   });
 
   const onSubmit = (data) => {
@@ -143,9 +153,12 @@ const PassengerForm = () => {
                   label="Date of birth*"
                   maxDate={new Date()}
                   {...field}
-                  error={!!error}
                   renderInput={(params) => (
-                    <TextField {...params} helperText={error?.message} />
+                    <TextField
+                      {...params}
+                      error={!!error}
+                      helperText={error?.message}
+                    />
                   )}
                 />
               </LocalizationProvider>
